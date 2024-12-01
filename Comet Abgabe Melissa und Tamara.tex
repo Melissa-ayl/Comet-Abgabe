@@ -1,0 +1,169 @@
+\documentclass{article}
+\usepackage[ngerman]{babel} 
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{xcolor} 
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+
+\title{Abgabe 1 Computergestützte Methoden}
+\author{Gruppe 94, Melissa Aygül (4255053),Tamara Markovic (4257209)} 
+\date{14.11.2024}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+\section{Der Zentrale Grenzwertsatz}
+Der Zentrale Grenzwertsatz (ZGS) ist ein fundamentales Resultat der Wahr-
+scheinlichkeitstheorie, das die Verteilung von Summen unabhängiger, identisch verteilter (\textit{i.i.d}) Zufallsvariablen (ZV) beschreibt. Er besagt, dass unter bestimmten Voraussetzungen die Summe einer großen Anzahl solcher ZV annähernd normalverteilt ist, unabhängig von der Verteilung der einzelnen ZV. Dies ist besonders nützlich, da die Normalverteilung gut untersucht und mathematisch handhabbar ist.
+
+\subsection{Aussage}
+Sei $X_1$,$X_2$,...,$X_n$ eine Folge von \textit{i.i.d.} ZV mit dem Erwartungswert $\mu = \mathbb{E}(X_i)$ und der Varianz $\sigma^2 = \text{Var}(X_i)$, wobei $0 < \sigma^2 < \infty$ gelte. Dann konvergiert
+die standardisierte Summe $Z_n$ dieser ZV für $n \to \infty$
+in Verteilung gegen eine Standardnormalverteilung:
+\footnote{Der zentrale Grenzwertsatz hat verschiedene Verallgemeinerungen. Eine davon ist der 
+\textit{Lindeberg-Feller-Zentrale-Grenzwertsatz} \cite[Seite 328]{Klenke}, der schwächere Bedingungen an die Unabhängigkeit 
+und die identische Verteilung der ZV stellt.}
+
+\begin{equation}
+Z_n = \frac{\sum_{i=1}^n X_i - n\mu}{\sigma\sqrt{n}} \overset{d}{\to} \mathcal{N}(0, 1).
+\label{eq1}
+\end{equation}
+Das bedeutet, dass für große $n$ die Summe der ZV näherungsweise normalverteilt ist 
+mit Erwartungswert $n\mu$ und Varianz $n\sigma^2$:
+
+\begin{equation}
+\sum_{i=1}^n X_i \sim \mathcal{N}(n\mu, n\sigma^2)
+\label{eq2}
+\end{equation}
+
+\subsection{Erklärung der Standardisierung}
+Um die Summe der ZV in eine Standardnormalverteilung zu transformieren, subtrahiert man den Erwartungswert $n\mu$ und teilt durch die Standardabweichung $\sigma\sqrt{n}$. Dies führt zu der obigen Formel \eqref{eq1} .Die Darstellung \eqref{eq2} ist für
+$n \to \infty$ nicht wohldefiniert.
+
+\subsection{Anwendungen}
+
+Der ZGS wird in vielen Bereichen der Statistik und der Wahrscheinlichkeitstheorie angewendet. Typische Beispiele sind:
+
+\begin{itemize}
+    \item \textit{Schätzung von Durchschnittswerten: Er hilft, den Mittelwert einer Population aus Stichproben zu bestimmen.}
+    \item \textit{Qualitätskontrolle: Er zeigt, wie sich Schwankungen bei Messungen auf den Durchschnitt auswirken.}
+\end{itemize}
+
+\newpage
+\section{Bearbeitung zu Aufgabe 1}
+\subsection{Thema Datenverarbeitung}
+\begin{enumerate}
+ \item Die Tabelle enthält eine Sammlung von Daten zur Fahrradstation „W 87 St and West End Ave“, die unserer Gruppe 94 zugeordnet ist. Diese Daten umfassen tägliche Wetterinformationen und einige zusätzliche Details, die zur Analyse der Fahrradnutzung in Abhängigkeit von Wetterbedingungen verwendet werden können.
+Das Datum wird in der Spalte „date“ angegeben, zusammen mit Tag des Jahres („day\_of\_year“) und Wochentag („day\_of\_week“). Außerdem wird der Monat des jeweiligen Datums in der Spalte „month\_of\_year“ festgehalten.Wichtige Wetterdaten umfassen die Niederschlagsmenge („precipitation“) und die Windgeschwindigkeit („windspeed“), die Hinweise darauf geben können, ob und wie Wetterfaktoren wie Regen oder Wind die Nutzung der Fahrradstation beeinflussen. Temperaturdaten werden durch drei Spalten dokumentiert: minimale Temperatur („min\_temperature“), durchschnittliche Temperatur („average\_temperature“) und maximale Temperatur („max\_temperature“), alle in Fahrenheit. 
+Eine weitere wichtige Spalte ist „count“, die die Zahl der entliehenen Fahrräder angibt. Durch diese Zählung kann analysiert werden, ob und in welchem Umfang die Fahrradnutzung von den Wetterbedingungen beeinflusst wird.
+\item In diesem Schritt wurde der Datensatz für die Analyse vorbereitet. Zunächst wurde Excel geöffnet und über den Pfad „Daten“ die Option „Daten abrufen und transformieren“ gewählt. Der Datensatz wurde anschließend über „Aus Datei“ → „Aus CSV“ importiert. Nach dem Import zeigte Excel eine erste Übersicht der Daten, die durch Transformation in das gewünschte Format gebracht wurden.
+
+Um die Analyse zu vereinfachen, wurden Filter gesetzt. In der Spalte „group“ wurde die Gruppe 94 ausgewählt, um die Tabelle auf relevante Datensätze zu reduzieren. Dadurch entstand eine übersichtliche und klar strukturierte Tabelle mit allen benötigten Informationen.
+\item Um die höchste mittlere Temperatur zu ermitteln haben wir die Werte in der Spalte „average\_temperature“ der Größe nach (absteigend) sortiert. 
+Zusätzlich zur Temperatur in Fahrenheit wurde eine Spalte „Mittlere Temperatur Celsius“ eingefügt, die die Durchschnittstemperatur in Celsius berechnet. Die Umrechnung erfolgt anhand der Formel ((\_temperature - 32) * 5/9). In Fällen, in denen die ursprüngliche Durchschnittstemperatur fehlt („NA“), zeigt diese Spalte Fehler an. Die höchste „average\_temperature“ wurde am 28.07.23 mit 83 Grad Fahrenheit gemessen. In diesem Fall berechnet man (86-32)*(5/9) und erhält das gerundete Ergebnis 28,33 Grad Celsius.
+
+\begin{figure}[h] % oder t, falls Grafiken immer oben ("top") erscheinen sollen
+    \centering
+    % benötigt \usepackage{graphicx} in der Präambel
+    \includegraphics[width = \textwidth]{Exel.png}
+    % mit in \renewcommand{\figurename}{Abbildung} zu "Abbildung" umbenennen
+\end{figure}
+
+\end{enumerate}
+\subsection{Thema Datenhaltung}
+\begin{enumerate}
+\item SQLite ist eine kompakte, serverlose Datenbank-Engine, die Daten effizient in einer einzigen Datei speichert. Für die Erstellung von Tabellen stehen in SQLite mehrere Datentypen zur Verfügung, die unterschiedliche Arten von Daten abdecken. Der Datentyp INTEGER dient zur Speicherung von Ganzzahlen ohne Dezimalstellen, ideal für Zähler oder IDs. REAL wird verwendet, um Fließkommazahlen zu speichern, etwa für Messdaten oder Durchschnittswerte. TEXT ermöglicht die Speicherung von Zeichenketten, wie Namen oder Beschreibungen, während BLOB für Binärdaten wie Bilder oder Dateien eingesetzt wird. Durch diese vielseitigen Datentypen bietet SQLite eine flexible und leistungsfähige Möglichkeit zur Datenverwaltung, die sich in zahlreichen Anwendungen bewährt hat.
+\item Die 1. Normalform wird erreicht, wenn alle Datensätze in einer Tabelle die gleiche Anzahl von Spalten aufweisen und jedes Datenfeld nur einen einzigen, ungeteilten Wert enthält. Jede Zelle der Tabelle muss atomar sein, das bedeutet, sie darf keine Mehrfachwerte oder Listen enthalten. Zudem muss jede Spalte einen eindeutigen Namen haben, während die Reihenfolge der Datensätze keine Rolle spielt.
+\begin{figure}[H] % oder t, falls Grafiken immer oben ("top") erscheinen sollen
+    \centering
+    % benötigt \usepackage{graphicx} in der Präambel
+    \includegraphics[width = \textwidth]{1 Normalform.jpg}
+    % mit in \renewcommand{\figurename}{Abbildung} zu "Abbildung" umbenennen
+\end{figure}
+
+Die 2. Normalform wird erreicht, wenn eine Tabelle die Anforderungen der 1. Normalform erfüllt und alle Nicht-Schlüsselattribute vollständig vom gesamten Primärschlüssel abhängen. Das bedeutet, dass kein Attribut nur von einem Teil des Schlüssels abhängig sein darf. Um dies sicherzustellen, können die Daten in mehrere Tabellen aufgeteilt werden, sodass jede Information eindeutig mit dem Primärschlüssel verknüpft ist.
+
+
+\begin{figure}[H] % oder t, falls Grafiken immer oben ("top") erscheinen sollen
+    \centering
+    % benötigt \usepackage{graphicx} in der Präambel
+    \includegraphics[width = \textwidth]{2.Normalform 1.0 .jpg}
+    % mit in \renewcommand{\figurename}{Abbildung} zu "Abbildung" umbenennen
+\end{figure}
+
+\begin{figure}[H] % oder t, falls Grafiken immer oben ("top") erscheinen sollen
+    \centering
+    % benötigt \usepackage{graphicx} in der Präambel
+    \includegraphics[width = \textwidth]{2. Normalform 2.0.jpg}
+    % mit in \renewcommand{\figurename}{Abbildung} zu "Abbildung" umbenennen
+\end{figure}
+
+\begin{figure}[H] % oder t, falls Grafiken immer oben ("top") erscheinen sollen
+    \centering
+    % benötigt \usepackage{graphicx} in der Präambel
+    \includegraphics[width = \textwidth]{2. Normalform 3.0.jpg}
+    % mit in \renewcommand{\figurename}{Abbildung} zu "Abbildung" umbenennen
+\end{figure}
+
+
+
+\begin{figure}[H] % oder t, falls Grafiken immer oben ("top") erscheinen sollen
+    \centering
+    % benötigt \usepackage{graphicx} in der Präambel
+    \includegraphics[width = \textwidth]{2. Normalform 4.0.jpg}
+    % mit in \renewcommand{\figurename}{Abbildung} zu "Abbildung" umbenennen
+\end{figure}
+
+\newpage
+\item Zuerst wurde eine Tabelle mit dem Namen Stations erstellt. Diese Tabelle dient dazu, die Namen der Stationen und die zugehörigen Gruppennummern zu speichern. Sie hat die Spalten station\_id, station\_name und group\_id. Die station\_id wird automatisch vergeben, um jede Station eindeutig zu identifizieren.
+
+Danach wurde eine zweite Tabelle mit dem Namen WeatherData erstellt. Diese Tabelle speichert alle relevanten Wetterdaten, wie das Datum, die Tages- und Monatsangaben, Temperaturen, Niederschlagsmenge und Windgeschwindigkeit. Außerdem enthält sie eine Spalte station\_id, um die Wetterdaten eindeutig mit einer Station aus der Stations-Tabelle zu verknüpfen.
+
+Im nächsten Schritt wurden die Daten in die Tabellen eingefügt. Zuerst wurden die Informationen über die Stationen in die Tabelle Stations eingetragen, wie zum Beispiel die Namen der Stationen und ihre Gruppennummern. Anschließend wurden die Wetterdaten in die Tabelle WeatherData eingepflegt. Dabei wurde darauf geachtet, die station\_id aus der Stations-Tabelle für jede Eintragung zu verwenden, damit die Verknüpfung zwischen den Tabellen funktioniert.
+
+\begin{figure}[H] % oder t, falls Grafiken immer oben ("top") erscheinen sollen
+    \centering
+    % benötigt \usepackage{graphicx} in der Präambel
+    \includegraphics[width = \textwidth]{sql 1.PNG}
+    % mit in \renewcommand{\figurename}{Abbildung} zu "Abbildung" umbenennen
+\end{figure}
+\newpage
+\item Wir haben die Datensätze mit einer Tabellenkalkulation vorbereitet. In Excel haben wir den Befehl „Suchen und Ersetzen“ verwendet, um alle Anführungszeichen aus den Daten zu entfernen. Dadurch sind die Spaltennamen und Werte jetzt durch Kommata getrennt, und die einzelnen Reihen werden durch Zeilenumbrüche (Newline-Characters) voneinander getrennt. Dieses Format macht den Import in die zuvor erstellten SQL-Tabellen einfacher und übersichtlicher.
+
+\begin{figure}[H] % oder t, falls Grafiken immer oben ("top") erscheinen sollen
+    \centering
+    % benötigt \usepackage{graphicx} in der Präambel
+    \includegraphics[width = \textwidth]{Tabellenkalkulation..png}
+    % mit in \renewcommand{\figurename}{Abbildung} zu "Abbildung" umbenennen
+\end{figure}
+
+\newpage
+\item Zum Schluss wurde eine Abfrage erstellt, um die höchste mittlere Temperatur für die Station "W 87 St and West End Ave" herauszufinden. Dazu wurde die station\_id dieser Station aus der Stations-Tabelle ermittelt, und mit dieser ID wurden die Wetterdaten in der Tabelle "WeatherData" durchsucht. Das Ergebnis der Abfrage zeigte, dass die höchste mittlere Temperatur bei dieser Station 28,33°C beträgt. Die Schritte wurden in der richtigen Reihenfolge durchgeführt, um eine saubere und funktionierende Datenbank zu erstellen.
+
+\begin{figure}[H] % oder t, falls Grafiken immer oben ("top") erscheinen sollen
+    \centering
+    % benötigt \usepackage{graphicx} in der Präambel
+    \includegraphics[width = \textwidth]{sql 2.PNG}
+    % mit in \renewcommand{\figurename}{Abbildung} zu "Abbildung" umbenennen
+\end{figure}
+
+
+\end{enumerate}
+\newpage
+
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\url{https://github.com/Melissa-ayl/Comet-Abgabe }
+\end{document}
+
+
